@@ -7,9 +7,9 @@ class ImageSerializer(serializers.ModelSerializer):
     # The spec calls for a field named 'objects' but this collides
     # with a Python field of the same name in the model. We're
     # providing an alias here
-    objects = serializers.SlugRelatedField(
-        many=True, slug_field='imgobjects', queryset=Image.objects.all())
+    objects = serializers.StringRelatedField(
+        source='imgobjects', many=True)
     
     class Meta:
         model = Image
-        fields = ['imgfile', 'detect']
+        fields = ['imgfile', 'detect', 'objects']
