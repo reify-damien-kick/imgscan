@@ -7,5 +7,5 @@ from imgscan.serializers import ImageSerializer
 
 class ImageViewSet(viewsets.ModelViewSet):
     permissions = [AllowAny]    # No auth in spec
-    queryset = Image.objects.all()
+    queryset = Image.dbobjects.all()
     serializer_class = ImageSerializer

@@ -6,6 +6,8 @@ def imgpath(model, filename):
 
 
 class Image(models.Model):
+    dbobjects = models.Manager()
+
     id = models.BigAutoField(primary_key=True)
     imgfile = models.FileField(upload_to=imgpath)
     detect = models.BooleanField(default=True)
@@ -13,11 +15,12 @@ class Image(models.Model):
     # The spec calls for a field named 'objects' but this collides
     # with a Python field of the same name. We'll rename the field in
     # the serializer
-    imgobjects = models.ForeignKey(
-        'ImgObject', on_delete=models.CASCADE, to_field='label',
-        null=True)
+    objects = models.ForeignKey(
+        'ImgObject', on_delete=models.CASCADE, null=True)
 
 
 class ImgObject(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    label = models.CharField(unique=True, max_length=256)
+    label = models.CharField(primary_key=True, max_length=256)
+
+    def __str__(self):
+        return self.label

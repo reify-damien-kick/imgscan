@@ -1,14 +1,16 @@
 from rest_framework import serializers
 
-from imgscan.models import Image
+from imgscan.models import Image, ImgObject
+
+class ImgObjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImgObject
+        fields = ['label']
 
 
 class ImageSerializer(serializers.ModelSerializer):
-    # The spec calls for a field named 'objects' but this collides
-    # with a Python field of the same name in the model. We're
-    # providing an alias here
-    objects = serializers.StringRelatedField(
-        source='imgobjects', many=True)
+    objects = ImgObjectSerializer(
+        many=True, required=False, allow_null=True)
     
     class Meta:
         model = Image
