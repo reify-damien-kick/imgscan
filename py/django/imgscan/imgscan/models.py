@@ -6,9 +6,8 @@ def imgpath(model, filename):
 
 
 class Image(models.Model):
-    # The spec calls for a field named 'objects' but this collides
-    # with a Python field of the same name. We'll rename the field in
-    # the serializer
+    # The spec calls for a field named 'objects'; rename the default
+    # manager to avoid colliding.
     dbobjects = models.Manager()
 
     id = models.BigAutoField(primary_key=True)
