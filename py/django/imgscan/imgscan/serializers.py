@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 from imgscan.models import Image, ImgObject
 
+
 class ImgObjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImgObject
