@@ -26,8 +26,6 @@ class ImageViewSet(viewsets.ModelViewSet):
 
 
 def maybe_update_image_labels(image):
-    print(F'image.detect = {image.detect}')
-    print(F'image.scanned = {image.scanned}')
     with transaction.atomic():
         if image.detect and image.scanned is None:
             try:
