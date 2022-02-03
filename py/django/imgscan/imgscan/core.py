@@ -14,8 +14,8 @@ def labels(filename):
         content = infile.read()
 
     image = vision.Image(content=content)
-    rspn = client.label_detection(image=image)
-    labels = rspn.label_annotations
+    response = client.label_detection(image=image)
+    labels = response.label_annotations
 
     return [label.description for label in labels]
 
