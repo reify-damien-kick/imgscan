@@ -23,3 +23,18 @@ labels = response.label_annotations
 print('Labels:')
 for label in labels:
     print(label.description)
+
+
+# (imgscan.v) dkick1@walter tests % python imgscan.py
+# Labels:
+# Cat
+# Window
+# Felidae
+# Carnivore
+# Jaw
+# Ear
+# Small to medium-sized cats
+# Window blind
+# Gesture
+# Whiskers
+# (imgscan.v) dkick1@walter tests % 

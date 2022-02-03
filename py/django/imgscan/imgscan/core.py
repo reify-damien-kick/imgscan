@@ -1,0 +1,49 @@
+import io
+
+from django.db import transaction
+from google.cloud import vision
+
+from imgscan import models
+
+
+def labels(filename):
+    client = vision.ImageAnnotatorClient()
+
+    with io.open(filename, 'rb') as infile:
+        content = infile.read()
+
+    image = vision.Image(content=content)
+    rspn = client.label_detection(image=image)
+    labels = rspn.label_annotations
+
+    return [label.description for label in labels]
+
+
+def images_to_scan():
+    mgr = models.Image.dbobjects
+    qry = mgr.filter(detect=True, scanned__isnull=True)
+    return qry.all()
+
+
+def update_images():
+    for image in images_to_scan():
+        update_image_labels(image)
+
+        
+def safe_update_images():
+    with transaction.atomic():
+        update_images()
+
+
+def update_image_labels(image):
+    for label in labels(image.imgfile.file.name):
+        imgobject = models.ImgObject.objects.get_or_create(label=label)
+        imgobject = imgobject[0]
+        image.objects.add(imgobject)
+    image.save()
+    return image
+
+
+def safe_update_image_labels(image):
+    with transaction.atomic():
+        return update_image_labels(image)
