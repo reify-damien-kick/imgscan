@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from imgscan.core import update_image_labels
+from imgscan.core import safe_update_image_labels
 from imgscan.models import Image
 from imgscan.serializers import ImageSerializer
 
@@ -26,10 +26,8 @@ class ImageViewSet(viewsets.ModelViewSet):
 
 
 def maybe_update_image_labels(image):
-    with transaction.atomic():
+    try:
         if image.detect and image.scanned is None:
-            try:
-                update_image_labels(image)
-            except Exception:
-                pass
-    return image
+            safe_update_image_labels(image)
+    except Exception:
+        pass
