@@ -17,12 +17,21 @@ class ImageViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         image = serializer.save()
         maybe_update_image_labels(image)
-    
+
     def retrieve(self, request, *args, **kwargs):
         image = self.get_object()
         maybe_update_image_labels(image)
         serializer = self.get_serializer(image)
         return Response(serializer.data)
+
+    def get_queryset(self):
+        queryset = Image.dbobjects.all()
+
+        if (imgobjects := self.request.query_params.get('objects')):
+            for imgobject in  imgobjects.split(','):
+                queryset = queryset.filter(objects__label=imgobject)
+
+        return queryset
 
 
 def maybe_update_image_labels(image):
