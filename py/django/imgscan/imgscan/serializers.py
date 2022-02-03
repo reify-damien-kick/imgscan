@@ -13,7 +13,7 @@ class ImgObjectSerializer(serializers.ModelSerializer):
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ['id', 'imgfile', 'detect', 'objects']
+        fields = ['id', 'imgfile', 'detect', 'scanned', 'objects']
 
     objects = ImgObjectSerializer(
         many=True, required=False, allow_null=True,

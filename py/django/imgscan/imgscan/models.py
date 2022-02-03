@@ -13,6 +13,7 @@ class Image(models.Model):
     id = models.BigAutoField(primary_key=True)
     imgfile = models.FileField(upload_to=imgpath, unique=True)
     detect = models.BooleanField(default=True)
+    scanned = models.DateTimeField(null=True)
 
     objects = models.ManyToManyField('ImgObject')
 
