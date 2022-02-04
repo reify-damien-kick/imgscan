@@ -28,7 +28,7 @@ class ImageViewSet(viewsets.ModelViewSet):
         queryset = Image.dbobjects.all()
 
         if (imgobjects := self.request.query_params.get('objects')):
-            for imgobject in  imgobjects.split(','):
+            for imgobject in imgobjects.split(','):
                 queryset = queryset.filter(objects__label=imgobject)
 
         return queryset

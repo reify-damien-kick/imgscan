@@ -38,11 +38,11 @@ def safe_update_images():
 
 def update_image_labels(image):
     x_labels = labels(image.imgfile.file.name)
-    image.scanned = timezone.now()
     for label in x_labels:
         imgobject = models.ImgObject.objects.get_or_create(label=label)
         imgobject = imgobject[0]
         image.objects.add(imgobject)
+    image.scanned = timezone.now()
     image.save()
     return image
 
