@@ -15,9 +15,9 @@ def labels(filename):
 
     image = vision.Image(content=content)
     response = client.label_detection(image=image)
-    labels = response.label_annotations
+    x_labels = response.label_annotations
 
-    return [label.description for label in labels]
+    return [label.description for label in x_labels]
 
 
 def images_to_scan():
@@ -30,7 +30,7 @@ def update_images():
     for image in images_to_scan():
         update_image_labels(image)
 
-        
+
 def safe_update_images():
     with transaction.atomic():
         update_images()

@@ -4,28 +4,25 @@ from rest_framework import serializers
 from imgscan.models import Image, ImgObject
 
 
-class ImgObjectSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ImgObject
-        fields = ['label']
-
-
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ['id', 'imgfile', 'detect', 'scanned', 'objects']
+        fields = ('id', 'imgfile', 'detect', 'objects')
+        read_only_fields = ('scanned',)
 
-    objects = ImgObjectSerializer(
-        many=True, required=False, allow_null=True,
-        default=[{'label': 'image'}])
+    detect = serializers.BooleanField(default=True)
 
-    def create(self, validata):
-        labels = validata.pop('objects')
+    objects = serializers.ListSerializer(
+        child=serializers.CharField(max_length=256), required=False,
+        default=['image'])
+
+    def create(self, validated_data):
+        labels = validated_data.pop('objects', [])
         with transaction.atomic():
-            image = Image.dbobjects.create(**validata)
+            image = Image.dbobjects.create(**validated_data)
             for label in labels:
-                imgobject = ImgObject.objects.get_or_create(**label)[0]
+                imgobject = ImgObject.objects.get_or_create(label=label)
+                imgobject = imgobject[0]
                 image.objects.add(imgobject)
             image.save()
             return image
-                

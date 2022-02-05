@@ -2,20 +2,26 @@ from django.db import transaction
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
+from rest_framework import parsers, renderers
 from rest_framework.response import Response
 
 from imgscan.core import safe_update_image_labels
-from imgscan.models import Image
+from imgscan.models import Image, ImgObject
 from imgscan.serializers import ImageSerializer
 
 
 class ImageViewSet(viewsets.ModelViewSet):
-    permissions = [AllowAny]    # No auth in spec. Maybe add later?
+    permissions = (AllowAny,)    # No auth in spec. Maybe add later?
     queryset = Image.dbobjects.all()
     serializer_class = ImageSerializer
+    renderer_classes = (renderers.JSONRenderer,)
+    parser_classes = (parsers.MultiPartParser,)
 
     def perform_create(self, serializer):
         image = serializer.save()
+        if not serializer.validated_data.get('objects'):
+            # If no user supplied label was given, add a default label
+            ImgObject.objects.get_or_create(label='image')
         maybe_update_image_labels(image)
 
     def retrieve(self, request, *args, **kwargs):
