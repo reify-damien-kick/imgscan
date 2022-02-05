@@ -21,8 +21,7 @@ class Image(models.Model):
 
 
 class ImgObject(models.Model):
-    # class Meta:
-    #     unique_together = ('image', 'label')
+    LABEL_MAX_LENGTH = 256
 
     id = models.BigAutoField(primary_key=True)
     label = models.CharField(max_length=256, unique=True)
