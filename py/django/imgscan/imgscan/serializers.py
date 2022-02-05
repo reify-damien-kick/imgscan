@@ -1,7 +1,7 @@
 from django.db import transaction
 from rest_framework import serializers
 
-from imgscan.models import Image, ImgObject
+from imgscan.models import Image, ImgObject, LABEL_MAX_LENGTH
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -13,8 +13,7 @@ class ImageSerializer(serializers.ModelSerializer):
     detect = serializers.BooleanField(default=True)
 
     objects = serializers.ListSerializer(
-        child=serializers.CharField(
-            max_length=ImgObject.LABEL_MAX_LENGTH),
+        child=serializers.CharField(max_length=LABEL_MAX_LENGTH),
         default=['image'])
 
     def create(self, validated_data):

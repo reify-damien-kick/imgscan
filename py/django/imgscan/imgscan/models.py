@@ -1,6 +1,9 @@
 from django.db import models
 
 
+LABEL_MAX_LENGTH = 256
+
+    
 def imgpath(__, filename):
     return F'imgscan/{filename}'
 
@@ -21,10 +24,9 @@ class Image(models.Model):
 
 
 class ImgObject(models.Model):
-    LABEL_MAX_LENGTH = 256
 
     id = models.BigAutoField(primary_key=True)
-    label = models.CharField(max_length=256, unique=True)
+    label = models.CharField(max_length=LABEL_MAX_LENGTH, unique=True)
 
     def __str__(self):
         return self.label
