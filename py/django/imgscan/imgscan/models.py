@@ -1,6 +1,7 @@
 from django.db import models
 
 
+DETECT_DEFAULT = True
 LABEL_MAX_LENGTH = 256
 
     
@@ -15,7 +16,7 @@ class Image(models.Model):
 
     id = models.BigAutoField(primary_key=True)
     imgfile = models.FileField(upload_to=imgpath, unique=True)
-    detect = models.BooleanField(default=True)
+    detect = models.BooleanField(default=DETECT_DEFAULT)
     scanned = models.DateTimeField(null=True)
 
     # https://amir.rachum.com/blog/2013/06/15/
