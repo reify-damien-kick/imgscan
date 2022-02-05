@@ -13,8 +13,7 @@ class ImageSerializer(serializers.ModelSerializer):
     detect = serializers.BooleanField(default=True)
 
     objects = serializers.ListSerializer(
-        child=serializers.CharField(max_length=256), required=False,
-        default=['image'])
+        child=serializers.CharField(max_length=256), default=['image'])
 
     def create(self, validated_data):
         labels = validated_data.pop('objects', [])
