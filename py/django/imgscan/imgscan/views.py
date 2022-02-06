@@ -1,3 +1,5 @@
+import logging
+
 from django.db import transaction
 from rest_framework import status
 from rest_framework import viewsets
@@ -9,6 +11,8 @@ from imgscan.core import safe_update_image_labels
 from imgscan.models import Image, ImgObject
 from imgscan.serializers import ImageSerializer
 
+
+logger = logging.getLogger(__name__)
 
 class ImageViewSet(viewsets.ModelViewSet):
     permissions = (AllowAny,)    # No auth in spec. Maybe add later?
@@ -41,5 +45,5 @@ def maybe_update_image_labels(image):
     try:
         if image.detect and image.scanned is None:
             safe_update_image_labels(image)
-    except Exception:
-        pass
+    except Exception as exc:
+        logger.exception(str(exc))
