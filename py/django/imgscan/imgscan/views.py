@@ -1,12 +1,12 @@
 import logging
 
 from django.db import transaction
-from rest_framework import parsers, renderers, status, viewsets
+from rest_framework import parsers, renderers, viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from imgscan.core import update_image_labels
-from imgscan.models import Image, ImgObject
+from imgscan.models import Image
 from imgscan.serializers import ImageSerializer
 
 

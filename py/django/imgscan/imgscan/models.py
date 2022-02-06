@@ -4,7 +4,7 @@ from django.db import models
 DETECT_DEFAULT = True
 LABEL_MAX_LENGTH = 256
 
-    
+
 def imgpath(__, filename):
     return F'imgscan/{filename}'
 
