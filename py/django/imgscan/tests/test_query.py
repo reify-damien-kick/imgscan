@@ -53,10 +53,15 @@ def test_query_rocket():
     assert imgfile.startswith(F'{MEDIA}/{filename}')
     assert imgfile.endswith(filetype)
     assert data['detect'] == DETECT_DEFAULT
+    x_objects = data['objects']
+    assert len(x_objects) > len(OBJECTS_DEFAULT)
     for x_object in OBJECTS_DEFAULT:
         assert x_object in data['objects']
+    # We are, I suppose, assuming that this images won't have the same
+    # objects detected, but I think that is a safe bet for these two.
+    key = x_objects[-1]
 
-    response = client.get('http://testserver/images?objects=Canidae')
+    response = client.get(F'http://testserver/images?objects={key}')
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 1
