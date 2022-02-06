@@ -15,7 +15,6 @@ class ImageSerializer(serializers.ModelSerializer):
 
     detect = serializers.BooleanField(default=DETECT_DEFAULT)
     scanned = serializers.DateTimeField(read_only=True)
-
     objects = serializers.ListSerializer(
         child=serializers.CharField(max_length=LABEL_MAX_LENGTH),
         default=OBJECTS_DEFAULT)
