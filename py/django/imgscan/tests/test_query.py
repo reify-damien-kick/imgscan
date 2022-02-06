@@ -37,7 +37,7 @@ def test_query_rocket():
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 0
-    
+
     filename = 'Rocket-Raccoon-2'
     filetype = '.jpg'
     fullname = F'{filename}{filetype}'
@@ -57,7 +57,7 @@ def test_query_rocket():
     assert len(x_objects) > len(OBJECTS_DEFAULT)
     for x_object in OBJECTS_DEFAULT:
         assert x_object in data['objects']
-        
+
     # We are, I suppose, assuming that these two images won't have the
     # same objects detected, but I think that is a safe bet.
     key = x_objects[-1]
