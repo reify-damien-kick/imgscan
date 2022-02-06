@@ -5,7 +5,7 @@ from rest_framework import parsers, renderers, status, viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from imgscan.core import safe_update_image_labels
+from imgscan.core import update_image_labels
 from imgscan.models import Image, ImgObject
 from imgscan.serializers import ImageSerializer
 
@@ -21,13 +21,15 @@ class ImageViewSet(viewsets.ModelViewSet):
     parser_classes = (parsers.MultiPartParser,)
 
     def perform_create(self, serializer):
-        image = serializer.save()
-        maybe_update_image_labels(image)
+        with transaction.atomic():
+            image = serializer.save()
+            maybe_update_image_labels(image)
 
     def retrieve(self, request, *args, **kwargs):
-        image = self.get_object()
-        maybe_update_image_labels(image)
-        serializer = self.get_serializer(image)
+        with transaction.atomic():
+            image = self.get_object()
+            maybe_update_image_labels(image)
+            serializer = self.get_serializer(image)
         return Response(serializer.data)
 
     def get_queryset(self):
@@ -43,6 +45,6 @@ class ImageViewSet(viewsets.ModelViewSet):
 def maybe_update_image_labels(image):
     try:
         if image.detect and image.scanned is None:
-            safe_update_image_labels(image)
+            update_image_labels(image)
     except Exception as exc:
         logger.exception(str(exc))
