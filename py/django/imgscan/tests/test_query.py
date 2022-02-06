@@ -57,8 +57,8 @@ def test_query_rocket():
     assert len(x_objects) > len(OBJECTS_DEFAULT)
     for x_object in OBJECTS_DEFAULT:
         assert x_object in data['objects']
-    # We are, I suppose, assuming that this images won't have the same
-    # objects detected, but I think that is a safe bet for these two.
+    # We are, I suppose, assuming that these two images won't have the
+    # same objects detected, but I think that is a safe bet.
     key = x_objects[-1]
 
     response = client.get(F'http://testserver/images?objects={key}')
