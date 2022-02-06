@@ -11,10 +11,10 @@ OBJECTS_DEFAULT = ['image']
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ('id', 'imgfile', 'detect', 'objects')
-        read_only_fields = ('scanned',)
+        fields = ('id', 'imgfile', 'detect', 'scanned', 'objects')
 
     detect = serializers.BooleanField(default=DETECT_DEFAULT)
+    scanned = serializers.DateTimeField(read_only=True)
 
     objects = serializers.ListSerializer(
         child=serializers.CharField(max_length=LABEL_MAX_LENGTH),

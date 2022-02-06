@@ -37,5 +37,6 @@ def test_post_oddities():
     imgfile = data['imgfile']
     assert imgfile.startswith(F'{MEDIA}/filename')
     assert imgfile.endswith('jpg')
+    assert 'scanned' in data
     assert data['detect'] == DETECT_DEFAULT
     assert data['objects'] == OBJECTS_DEFAULT
