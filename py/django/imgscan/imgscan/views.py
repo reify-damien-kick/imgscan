@@ -19,9 +19,6 @@ class ImageViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         image = serializer.save()
-        if not serializer.validated_data.get('objects'):
-            # If no user supplied label was given, add a default label
-            ImgObject.objects.get_or_create(label='image')
         maybe_update_image_labels(image)
 
     def retrieve(self, request, *args, **kwargs):
