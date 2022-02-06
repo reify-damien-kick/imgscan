@@ -20,7 +20,7 @@ class Image(models.Model):
     scanned = models.DateTimeField(null=True)
 
     # https://amir.rachum.com/blog/2013/06/15/
-    #   a-case-for-a-onetomany-relationship-in-django/
+    # ... a-case-for-a-onetomany-relationship-in-django/
     objects = models.ManyToManyField('ImgObject')
 
 
