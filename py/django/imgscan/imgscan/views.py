@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 class ImageViewSet(viewsets.ModelViewSet):
-    permissions = (AllowAny,)    # No auth in spec. Maybe add later?
+    permissions = (AllowAny,)
     queryset = Image.dbobjects.all()
     serializer_class = ImageSerializer
     renderer_classes = (renderers.JSONRenderer,)
