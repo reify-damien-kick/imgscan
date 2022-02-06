@@ -5,6 +5,9 @@ from imgscan.models import (
     Image, ImgObject, DETECT_DEFAULT, LABEL_MAX_LENGTH)
 
 
+OBJECTS_DEFAULT = ['image']
+
+
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
@@ -15,7 +18,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
     objects = serializers.ListSerializer(
         child=serializers.CharField(max_length=LABEL_MAX_LENGTH),
-        default=['image'])
+        default=OBJECTS_DEFAULT)
 
     def create(self, validated_data):
         labels = validated_data.pop('objects', [])
