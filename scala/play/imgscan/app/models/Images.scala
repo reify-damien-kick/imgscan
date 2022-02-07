@@ -5,7 +5,7 @@ import play.api.libs.json._
 
 case class Image(val id: Int, val imgfile: String, val detect: Boolean)
 
-object Image {
+object ImageWrites {
   implicit val imageWrites = new Writes[Image] {
     def writes(x: Image) = Json.obj(
       "id" -> x.id, "imgfile" -> x.imgfile, "detect" -> x.detect)
