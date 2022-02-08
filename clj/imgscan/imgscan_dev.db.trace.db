@@ -1,0 +1,516 @@
+2022-02-08 10:12:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "SCHEMA_MIGRATIONS" not found; SQL statement:
+SELECT 1 FROM schema_migrations [42102-200]
+2022-02-08 10:12:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE ""imgscan_image"" (
+""id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT[*],
+""imgfile"" VARCHAR(100) NOT NULL UNIQUE,
+""detect"" BOOL NOT NULL,
+""scanned"" DATETIME NULL);
+
+CREATE TABLE ""imgscan_imgobject"" (
+""id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+""label"" VARCHAR(256) NOT NULL UNIQUE);
+
+CREATE TABLE ""imgscan_image_objects"" (
+""id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+""image_id"" BIGINT NOT NULL REFERENCES
+""imgscan_image"" (""id"") DEFERRABLE INITIALLY DEFERRED,
+""imgobject_id"" BIGINT NOT NULL REFERENCES
+""imgscan_imgobject"" (""id"") DEFERRABLE INITIALLY DEFERRED);
+
+CREATE UNIQUE INDEX
+""imgscan_image_objects_image_id_imgobject_id_4857e070_uniq""
+ON ""imgscan_image_objects"" (""image_id"", ""imgobject_id"");
+
+CREATE INDEX ""imgscan_image_objects_image_id_b891c35f""
+ON ""imgscan_image_objects"" (""image_id"");
+
+CREATE INDEX ""imgscan_image_objects_imgobject_id_fe509086""
+ON ""imgscan_image_objects"" (""imgobject_id"");
+"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE "imgscan_image" (
+"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+"imgfile" varchar(100) NOT NULL UNIQUE,
+"detect" bool NOT NULL,
+"scanned" datetime NULL);
+
+CREATE TABLE "imgscan_imgobject" (
+"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+"label" varchar(256) NOT NULL UNIQUE);
+
+CREATE TABLE "imgscan_image_objects" (
+"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+"image_id" bigint NOT NULL REFERENCES
+"imgscan_image" ("id") DEFERRABLE INITIALLY DEFERRED,
+"imgobject_id" bigint NOT NULL REFERENCES
+"imgscan_imgobject" ("id") DEFERRABLE INITIALLY DEFERRED);
+
+CREATE UNIQUE INDEX
+"imgscan_image_objects_image_id_imgobject_id_4857e070_uniq"
+ON "imgscan_image_objects" ("image_id", "imgobject_id");
+
+CREATE INDEX "imgscan_image_objects_image_id_b891c35f"
+ON "imgscan_image_objects" ("image_id");
+
+CREATE INDEX "imgscan_image_objects_imgobject_id_fe509086"
+ON "imgscan_image_objects" ("imgobject_id");
+ [42001-200]
+2022-02-08 10:12:20 jdbc[13]: exception
+org.h2.jdbc.JdbcBatchUpdateException: Syntax error in SQL statement "CREATE TABLE ""imgscan_image"" (
+""id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT[*],
+""imgfile"" VARCHAR(100) NOT NULL UNIQUE,
+""detect"" BOOL NOT NULL,
+""scanned"" DATETIME NULL);
+
+CREATE TABLE ""imgscan_imgobject"" (
+""id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+""label"" VARCHAR(256) NOT NULL UNIQUE);
+
+CREATE TABLE ""imgscan_image_objects"" (
+""id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+""image_id"" BIGINT NOT NULL REFERENCES
+""imgscan_image"" (""id"") DEFERRABLE INITIALLY DEFERRED,
+""imgobject_id"" BIGINT NOT NULL REFERENCES
+""imgscan_imgobject"" (""id"") DEFERRABLE INITIALLY DEFERRED);
+
+CREATE UNIQUE INDEX
+""imgscan_image_objects_image_id_imgobject_id_4857e070_uniq""
+ON ""imgscan_image_objects"" (""image_id"", ""imgobject_id"");
+
+CREATE INDEX ""imgscan_image_objects_image_id_b891c35f""
+ON ""imgscan_image_objects"" (""image_id"");
+
+CREATE INDEX ""imgscan_image_objects_imgobject_id_fe509086""
+ON ""imgscan_image_objects"" (""imgobject_id"");
+"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE "imgscan_image" (
+"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+"imgfile" varchar(100) NOT NULL UNIQUE,
+"detect" bool NOT NULL,
+"scanned" datetime NULL);
+
+CREATE TABLE "imgscan_imgobject" (
+"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+"label" varchar(256) NOT NULL UNIQUE);
+
+CREATE TABLE "imgscan_image_objects" (
+"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+"image_id" bigint NOT NULL REFERENCES
+"imgscan_image" ("id") DEFERRABLE INITIALLY DEFERRED,
+"imgobject_id" bigint NOT NULL REFERENCES
+"imgscan_imgobject" ("id") DEFERRABLE INITIALLY DEFERRED);
+
+CREATE UNIQUE INDEX
+"imgscan_image_objects_image_id_imgobject_id_4857e070_uniq"
+ON "imgscan_image_objects" ("image_id", "imgobject_id");
+
+CREATE INDEX "imgscan_image_objects_image_id_b891c35f"
+ON "imgscan_image_objects" ("image_id");
+
+CREATE INDEX "imgscan_image_objects_imgobject_id_fe509086"
+ON "imgscan_image_objects" ("imgobject_id");
+ [42001-200]
+	at org.h2.jdbc.JdbcStatement.executeBatch(JdbcStatement.java:781)
+	at clojure.java.jdbc$execute_batch.invokeStatic(jdbc.clj:598)
+	at clojure.java.jdbc$execute_batch.invoke(jdbc.clj:591)
+	at clojure.java.jdbc$db_do_commands$fn__12419.invoke(jdbc.clj:958)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:860)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_do_commands.invokeStatic(jdbc.clj:957)
+	at clojure.java.jdbc$db_do_commands.invoke(jdbc.clj:942)
+	at clojure.java.jdbc$db_do_commands.invokeStatic(jdbc.clj:951)
+	at clojure.java.jdbc$db_do_commands.invoke(jdbc.clj:942)
+	at migratus.migration.sql$execute_command$fn__17566.invoke(sql.clj:63)
+	at migratus.migration.sql$execute_command.invokeStatic(sql.clj:62)
+	at migratus.migration.sql$execute_command.invoke(sql.clj:59)
+	at migratus.migration.sql$run_sql_STAR_.invokeStatic(sql.clj:80)
+	at migratus.migration.sql$run_sql_STAR_.invoke(sql.clj:76)
+	at migratus.migration.sql$run_sql$fn__17584.invoke(sql.clj:88)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:860)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at migratus.migration.sql$run_sql.invokeStatic(sql.clj:86)
+	at migratus.migration.sql$run_sql.invoke(sql.clj:82)
+	at migratus.migration.sql.SqlMigration.up(sql.clj:105)
+	at migratus.database$migrate_up_STAR_.invokeStatic(database.clj:62)
+	at migratus.database$migrate_up_STAR_.invoke(database.clj:56)
+	at migratus.database.Database$fn__17892.invoke(database.clj:262)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:807)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at migratus.database.Database.migrate_up(database.clj:261)
+	at migratus.core$up_STAR_.invokeStatic(core.clj:79)
+	at migratus.core$up_STAR_.invoke(core.clj:77)
+	at migratus.core$migrate_up_STAR_.invokeStatic(core.clj:90)
+	at migratus.core$migrate_up_STAR_.invoke(core.clj:81)
+	at migratus.core$migrate_STAR_.invokeStatic(core.clj:103)
+	at migratus.core$migrate_STAR_.invoke(core.clj:99)
+	at clojure.core$partial$fn__5839.invoke(core.clj:2625)
+	at migratus.core$run.invokeStatic(core.clj:53)
+	at migratus.core$run.invoke(core.clj:49)
+	at migratus.core$migrate.invokeStatic(core.clj:110)
+	at migratus.core$migrate.invoke(core.clj:105)
+	at luminus_migrations.core$fn__18043.invokeStatic(core.clj:44)
+	at luminus_migrations.core$fn__18043.invoke(core.clj:41)
+	at luminus_migrations.core$migrate.invokeStatic(core.clj:98)
+	at luminus_migrations.core$migrate.invoke(core.clj:84)
+	at user$migrate.invokeStatic(user.clj:51)
+	at user$migrate.invoke(user.clj:48)
+	at user$eval24634.invokeStatic(form-init10377824988804662627.clj:73)
+	at user$eval24634.invoke(form-init10377824988804662627.clj:73)
+	at clojure.lang.Compiler.eval(Compiler.java:7177)
+	at clojure.lang.Compiler.eval(Compiler.java:7132)
+	at clojure.core$eval.invokeStatic(core.clj:3214)
+	at clojure.core$eval.invoke(core.clj:3210)
+	at nrepl.middleware.interruptible_eval$evaluate$fn__16138$fn__16139.invoke(interruptible_eval.clj:87)
+	at clojure.lang.AFn.applyToHelper(AFn.java:152)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:665)
+	at clojure.core$with_bindings_STAR_.invokeStatic(core.clj:1973)
+	at clojure.core$with_bindings_STAR_.doInvoke(core.clj:1973)
+	at clojure.lang.RestFn.invoke(RestFn.java:425)
+	at nrepl.middleware.interruptible_eval$evaluate$fn__16138.invoke(interruptible_eval.clj:87)
+	at clojure.main$repl$read_eval_print__9086$fn__9089.invoke(main.clj:437)
+	at clojure.main$repl$read_eval_print__9086.invoke(main.clj:437)
+	at clojure.main$repl$fn__9095.invoke(main.clj:458)
+	at clojure.main$repl.invokeStatic(main.clj:458)
+	at clojure.main$repl.doInvoke(main.clj:368)
+	at clojure.lang.RestFn.invoke(RestFn.java:1523)
+	at nrepl.middleware.interruptible_eval$evaluate.invokeStatic(interruptible_eval.clj:84)
+	at nrepl.middleware.interruptible_eval$evaluate.invoke(interruptible_eval.clj:56)
+	at nrepl.middleware.interruptible_eval$interruptible_eval$fn__16171$fn__16175.invoke(interruptible_eval.clj:152)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at nrepl.middleware.session$session_exec$main_loop__16240$fn__16244.invoke(session.clj:218)
+	at nrepl.middleware.session$session_exec$main_loop__16240.invoke(session.clj:217)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE ""imgscan_image"" (
+""id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT[*],
+""imgfile"" VARCHAR(100) NOT NULL UNIQUE,
+""detect"" BOOL NOT NULL,
+""scanned"" DATETIME NULL);
+
+CREATE TABLE ""imgscan_imgobject"" (
+""id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+""label"" VARCHAR(256) NOT NULL UNIQUE);
+
+CREATE TABLE ""imgscan_image_objects"" (
+""id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+""image_id"" BIGINT NOT NULL REFERENCES
+""imgscan_image"" (""id"") DEFERRABLE INITIALLY DEFERRED,
+""imgobject_id"" BIGINT NOT NULL REFERENCES
+""imgscan_imgobject"" (""id"") DEFERRABLE INITIALLY DEFERRED);
+
+CREATE UNIQUE INDEX
+""imgscan_image_objects_image_id_imgobject_id_4857e070_uniq""
+ON ""imgscan_image_objects"" (""image_id"", ""imgobject_id"");
+
+CREATE INDEX ""imgscan_image_objects_image_id_b891c35f""
+ON ""imgscan_image_objects"" (""image_id"");
+
+CREATE INDEX ""imgscan_image_objects_imgobject_id_fe509086""
+ON ""imgscan_image_objects"" (""imgobject_id"");
+"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE "imgscan_image" (
+"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+"imgfile" varchar(100) NOT NULL UNIQUE,
+"detect" bool NOT NULL,
+"scanned" datetime NULL);
+
+CREATE TABLE "imgscan_imgobject" (
+"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+"label" varchar(256) NOT NULL UNIQUE);
+
+CREATE TABLE "imgscan_image_objects" (
+"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+"image_id" bigint NOT NULL REFERENCES
+"imgscan_image" ("id") DEFERRABLE INITIALLY DEFERRED,
+"imgobject_id" bigint NOT NULL REFERENCES
+"imgscan_imgobject" ("id") DEFERRABLE INITIALLY DEFERRED);
+
+CREATE UNIQUE INDEX
+"imgscan_image_objects_image_id_imgobject_id_4857e070_uniq"
+ON "imgscan_image_objects" ("image_id", "imgobject_id");
+
+CREATE INDEX "imgscan_image_objects_image_id_b891c35f"
+ON "imgscan_image_objects" ("image_id");
+
+CREATE INDEX "imgscan_image_objects_imgobject_id_fe509086"
+ON "imgscan_image_objects" ("imgobject_id");
+ [42001-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.getSyntaxError(DbException.java:243)
+	at org.h2.command.Parser.getSyntaxError(Parser.java:1053)
+	at org.h2.command.Parser.read(Parser.java:4995)
+	at org.h2.command.Parser.readIfMore(Parser.java:1462)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8380)
+	at org.h2.command.Parser.parseCreate(Parser.java:6276)
+	at org.h2.command.Parser.parsePrepared(Parser.java:903)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:819)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.executeBatch(JdbcStatement.java:768)
+	at clojure.java.jdbc$execute_batch.invokeStatic(jdbc.clj:598)
+	at clojure.java.jdbc$execute_batch.invoke(jdbc.clj:591)
+	at clojure.java.jdbc$db_do_commands$fn__12419.invoke(jdbc.clj:958)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:860)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_do_commands.invokeStatic(jdbc.clj:957)
+	at clojure.java.jdbc$db_do_commands.invoke(jdbc.clj:942)
+	at clojure.java.jdbc$db_do_commands.invokeStatic(jdbc.clj:951)
+	at clojure.java.jdbc$db_do_commands.invoke(jdbc.clj:942)
+	at migratus.migration.sql$execute_command$fn__17566.invoke(sql.clj:63)
+	at migratus.migration.sql$execute_command.invokeStatic(sql.clj:62)
+	at migratus.migration.sql$execute_command.invoke(sql.clj:59)
+	at migratus.migration.sql$run_sql_STAR_.invokeStatic(sql.clj:80)
+	at migratus.migration.sql$run_sql_STAR_.invoke(sql.clj:76)
+	at migratus.migration.sql$run_sql$fn__17584.invoke(sql.clj:88)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:860)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at migratus.migration.sql$run_sql.invokeStatic(sql.clj:86)
+	at migratus.migration.sql$run_sql.invoke(sql.clj:82)
+	at migratus.migration.sql.SqlMigration.up(sql.clj:105)
+	at migratus.database$migrate_up_STAR_.invokeStatic(database.clj:62)
+	at migratus.database$migrate_up_STAR_.invoke(database.clj:56)
+	at migratus.database.Database$fn__17892.invoke(database.clj:262)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:807)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at migratus.database.Database.migrate_up(database.clj:261)
+	at migratus.core$up_STAR_.invokeStatic(core.clj:79)
+	at migratus.core$up_STAR_.invoke(core.clj:77)
+	at migratus.core$migrate_up_STAR_.invokeStatic(core.clj:90)
+	at migratus.core$migrate_up_STAR_.invoke(core.clj:81)
+	at migratus.core$migrate_STAR_.invokeStatic(core.clj:103)
+	at migratus.core$migrate_STAR_.invoke(core.clj:99)
+	at clojure.core$partial$fn__5839.invoke(core.clj:2625)
+	at migratus.core$run.invokeStatic(core.clj:53)
+	at migratus.core$run.invoke(core.clj:49)
+	at migratus.core$migrate.invokeStatic(core.clj:110)
+	at migratus.core$migrate.invoke(core.clj:105)
+	at luminus_migrations.core$fn__18043.invokeStatic(core.clj:44)
+	at luminus_migrations.core$fn__18043.invoke(core.clj:41)
+	at luminus_migrations.core$migrate.invokeStatic(core.clj:98)
+	at luminus_migrations.core$migrate.invoke(core.clj:84)
+	at user$migrate.invokeStatic(user.clj:51)
+	at user$migrate.invoke(user.clj:48)
+	at user$eval24634.invokeStatic(form-init10377824988804662627.clj:73)
+	at user$eval24634.invoke(form-init10377824988804662627.clj:73)
+	at clojure.lang.Compiler.eval(Compiler.java:7177)
+	at clojure.lang.Compiler.eval(Compiler.java:7132)
+	at clojure.core$eval.invokeStatic(core.clj:3214)
+	at clojure.core$eval.invoke(core.clj:3210)
+	at nrepl.middleware.interruptible_eval$evaluate$fn__16138$fn__16139.invoke(interruptible_eval.clj:87)
+	at clojure.lang.AFn.applyToHelper(AFn.java:152)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:665)
+	at clojure.core$with_bindings_STAR_.invokeStatic(core.clj:1973)
+	at clojure.core$with_bindings_STAR_.doInvoke(core.clj:1973)
+	at clojure.lang.RestFn.invoke(RestFn.java:425)
+	at nrepl.middleware.interruptible_eval$evaluate$fn__16138.invoke(interruptible_eval.clj:87)
+	at clojure.main$repl$read_eval_print__9086$fn__9089.invoke(main.clj:437)
+	at clojure.main$repl$read_eval_print__9086.invoke(main.clj:437)
+	at clojure.main$repl$fn__9095.invoke(main.clj:458)
+	at clojure.main$repl.invokeStatic(main.clj:458)
+	at clojure.main$repl.doInvoke(main.clj:368)
+	at clojure.lang.RestFn.invoke(RestFn.java:1523)
+	at nrepl.middleware.interruptible_eval$evaluate.invokeStatic(interruptible_eval.clj:84)
+	at nrepl.middleware.interruptible_eval$evaluate.invoke(interruptible_eval.clj:56)
+	at nrepl.middleware.interruptible_eval$interruptible_eval$fn__16171$fn__16175.invoke(interruptible_eval.clj:152)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at nrepl.middleware.session$session_exec$main_loop__16240$fn__16244.invoke(session.clj:218)
+	at nrepl.middleware.session$session_exec$main_loop__16240.invoke(session.clj:217)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-02-08 10:12:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "imgscan_image_objects" not found; SQL statement:
+DROP TABLE "imgscan_image_objects"; [42102-200]
+2022-02-08 10:12:20 jdbc[13]: exception
+org.h2.jdbc.JdbcBatchUpdateException: Table "imgscan_image_objects" not found; SQL statement:
+DROP TABLE "imgscan_image_objects"; [42102-200]
+	at org.h2.jdbc.JdbcStatement.executeBatch(JdbcStatement.java:781)
+	at clojure.java.jdbc$execute_batch.invokeStatic(jdbc.clj:598)
+	at clojure.java.jdbc$execute_batch.invoke(jdbc.clj:591)
+	at clojure.java.jdbc$db_do_commands$fn__12419.invoke(jdbc.clj:958)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:860)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_do_commands.invokeStatic(jdbc.clj:957)
+	at clojure.java.jdbc$db_do_commands.invoke(jdbc.clj:942)
+	at clojure.java.jdbc$db_do_commands.invokeStatic(jdbc.clj:951)
+	at clojure.java.jdbc$db_do_commands.invoke(jdbc.clj:942)
+	at migratus.migration.sql$execute_command$fn__17566.invoke(sql.clj:63)
+	at migratus.migration.sql$execute_command.invokeStatic(sql.clj:62)
+	at migratus.migration.sql$execute_command.invoke(sql.clj:59)
+	at migratus.migration.sql$run_sql_STAR_.invokeStatic(sql.clj:80)
+	at migratus.migration.sql$run_sql_STAR_.invoke(sql.clj:76)
+	at migratus.migration.sql$run_sql$fn__17584.invoke(sql.clj:88)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:860)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at migratus.migration.sql$run_sql.invokeStatic(sql.clj:86)
+	at migratus.migration.sql$run_sql.invoke(sql.clj:82)
+	at migratus.migration.sql.SqlMigration.down(sql.clj:109)
+	at migratus.database$migrate_up_STAR_$fn__17822.invoke(database.clj:71)
+	at migratus.database$migrate_up_STAR_.invokeStatic(database.clj:70)
+	at migratus.database$migrate_up_STAR_.invoke(database.clj:56)
+	at migratus.database.Database$fn__17892.invoke(database.clj:262)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:807)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at migratus.database.Database.migrate_up(database.clj:261)
+	at migratus.core$up_STAR_.invokeStatic(core.clj:79)
+	at migratus.core$up_STAR_.invoke(core.clj:77)
+	at migratus.core$migrate_up_STAR_.invokeStatic(core.clj:90)
+	at migratus.core$migrate_up_STAR_.invoke(core.clj:81)
+	at migratus.core$migrate_STAR_.invokeStatic(core.clj:103)
+	at migratus.core$migrate_STAR_.invoke(core.clj:99)
+	at clojure.core$partial$fn__5839.invoke(core.clj:2625)
+	at migratus.core$run.invokeStatic(core.clj:53)
+	at migratus.core$run.invoke(core.clj:49)
+	at migratus.core$migrate.invokeStatic(core.clj:110)
+	at migratus.core$migrate.invoke(core.clj:105)
+	at luminus_migrations.core$fn__18043.invokeStatic(core.clj:44)
+	at luminus_migrations.core$fn__18043.invoke(core.clj:41)
+	at luminus_migrations.core$migrate.invokeStatic(core.clj:98)
+	at luminus_migrations.core$migrate.invoke(core.clj:84)
+	at user$migrate.invokeStatic(user.clj:51)
+	at user$migrate.invoke(user.clj:48)
+	at user$eval24634.invokeStatic(form-init10377824988804662627.clj:73)
+	at user$eval24634.invoke(form-init10377824988804662627.clj:73)
+	at clojure.lang.Compiler.eval(Compiler.java:7177)
+	at clojure.lang.Compiler.eval(Compiler.java:7132)
+	at clojure.core$eval.invokeStatic(core.clj:3214)
+	at clojure.core$eval.invoke(core.clj:3210)
+	at nrepl.middleware.interruptible_eval$evaluate$fn__16138$fn__16139.invoke(interruptible_eval.clj:87)
+	at clojure.lang.AFn.applyToHelper(AFn.java:152)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:665)
+	at clojure.core$with_bindings_STAR_.invokeStatic(core.clj:1973)
+	at clojure.core$with_bindings_STAR_.doInvoke(core.clj:1973)
+	at clojure.lang.RestFn.invoke(RestFn.java:425)
+	at nrepl.middleware.interruptible_eval$evaluate$fn__16138.invoke(interruptible_eval.clj:87)
+	at clojure.main$repl$read_eval_print__9086$fn__9089.invoke(main.clj:437)
+	at clojure.main$repl$read_eval_print__9086.invoke(main.clj:437)
+	at clojure.main$repl$fn__9095.invoke(main.clj:458)
+	at clojure.main$repl.invokeStatic(main.clj:458)
+	at clojure.main$repl.doInvoke(main.clj:368)
+	at clojure.lang.RestFn.invoke(RestFn.java:1523)
+	at nrepl.middleware.interruptible_eval$evaluate.invokeStatic(interruptible_eval.clj:84)
+	at nrepl.middleware.interruptible_eval$evaluate.invoke(interruptible_eval.clj:56)
+	at nrepl.middleware.interruptible_eval$interruptible_eval$fn__16171$fn__16175.invoke(interruptible_eval.clj:152)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at nrepl.middleware.session$session_exec$main_loop__16240$fn__16244.invoke(session.clj:218)
+	at nrepl.middleware.session$session_exec$main_loop__16240.invoke(session.clj:217)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "imgscan_image_objects" not found; SQL statement:
+DROP TABLE "imgscan_image_objects"; [42102-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:65)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:124)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	at org.h2.command.CommandList.update(CommandList.java:66)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:168)
+	at org.h2.jdbc.JdbcStatement.executeBatch(JdbcStatement.java:768)
+	at clojure.java.jdbc$execute_batch.invokeStatic(jdbc.clj:598)
+	at clojure.java.jdbc$execute_batch.invoke(jdbc.clj:591)
+	at clojure.java.jdbc$db_do_commands$fn__12419.invoke(jdbc.clj:958)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:860)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_do_commands.invokeStatic(jdbc.clj:957)
+	at clojure.java.jdbc$db_do_commands.invoke(jdbc.clj:942)
+	at clojure.java.jdbc$db_do_commands.invokeStatic(jdbc.clj:951)
+	at clojure.java.jdbc$db_do_commands.invoke(jdbc.clj:942)
+	at migratus.migration.sql$execute_command$fn__17566.invoke(sql.clj:63)
+	at migratus.migration.sql$execute_command.invokeStatic(sql.clj:62)
+	at migratus.migration.sql$execute_command.invoke(sql.clj:59)
+	at migratus.migration.sql$run_sql_STAR_.invokeStatic(sql.clj:80)
+	at migratus.migration.sql$run_sql_STAR_.invoke(sql.clj:76)
+	at migratus.migration.sql$run_sql$fn__17584.invoke(sql.clj:88)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:860)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at migratus.migration.sql$run_sql.invokeStatic(sql.clj:86)
+	at migratus.migration.sql$run_sql.invoke(sql.clj:82)
+	at migratus.migration.sql.SqlMigration.down(sql.clj:109)
+	at migratus.database$migrate_up_STAR_$fn__17822.invoke(database.clj:71)
+	at migratus.database$migrate_up_STAR_.invokeStatic(database.clj:70)
+	at migratus.database$migrate_up_STAR_.invoke(database.clj:56)
+	at migratus.database.Database$fn__17892.invoke(database.clj:262)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:807)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:789)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:776)
+	at migratus.database.Database.migrate_up(database.clj:261)
+	at migratus.core$up_STAR_.invokeStatic(core.clj:79)
+	at migratus.core$up_STAR_.invoke(core.clj:77)
+	at migratus.core$migrate_up_STAR_.invokeStatic(core.clj:90)
+	at migratus.core$migrate_up_STAR_.invoke(core.clj:81)
+	at migratus.core$migrate_STAR_.invokeStatic(core.clj:103)
+	at migratus.core$migrate_STAR_.invoke(core.clj:99)
+	at clojure.core$partial$fn__5839.invoke(core.clj:2625)
+	at migratus.core$run.invokeStatic(core.clj:53)
+	at migratus.core$run.invoke(core.clj:49)
+	at migratus.core$migrate.invokeStatic(core.clj:110)
+	at migratus.core$migrate.invoke(core.clj:105)
+	at luminus_migrations.core$fn__18043.invokeStatic(core.clj:44)
+	at luminus_migrations.core$fn__18043.invoke(core.clj:41)
+	at luminus_migrations.core$migrate.invokeStatic(core.clj:98)
+	at luminus_migrations.core$migrate.invoke(core.clj:84)
+	at user$migrate.invokeStatic(user.clj:51)
+	at user$migrate.invoke(user.clj:48)
+	at user$eval24634.invokeStatic(form-init10377824988804662627.clj:73)
+	at user$eval24634.invoke(form-init10377824988804662627.clj:73)
+	at clojure.lang.Compiler.eval(Compiler.java:7177)
+	at clojure.lang.Compiler.eval(Compiler.java:7132)
+	at clojure.core$eval.invokeStatic(core.clj:3214)
+	at clojure.core$eval.invoke(core.clj:3210)
+	at nrepl.middleware.interruptible_eval$evaluate$fn__16138$fn__16139.invoke(interruptible_eval.clj:87)
+	at clojure.lang.AFn.applyToHelper(AFn.java:152)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:665)
+	at clojure.core$with_bindings_STAR_.invokeStatic(core.clj:1973)
+	at clojure.core$with_bindings_STAR_.doInvoke(core.clj:1973)
+	at clojure.lang.RestFn.invoke(RestFn.java:425)
+	at nrepl.middleware.interruptible_eval$evaluate$fn__16138.invoke(interruptible_eval.clj:87)
+	at clojure.main$repl$read_eval_print__9086$fn__9089.invoke(main.clj:437)
+	at clojure.main$repl$read_eval_print__9086.invoke(main.clj:437)
+	at clojure.main$repl$fn__9095.invoke(main.clj:458)
+	at clojure.main$repl.invokeStatic(main.clj:458)
+	at clojure.main$repl.doInvoke(main.clj:368)
+	at clojure.lang.RestFn.invoke(RestFn.java:1523)
+	at nrepl.middleware.interruptible_eval$evaluate.invokeStatic(interruptible_eval.clj:84)
+	at nrepl.middleware.interruptible_eval$evaluate.invoke(interruptible_eval.clj:56)
+	at nrepl.middleware.interruptible_eval$interruptible_eval$fn__16171$fn__16175.invoke(interruptible_eval.clj:152)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at nrepl.middleware.session$session_exec$main_loop__16240$fn__16244.invoke(session.clj:218)
+	at nrepl.middleware.session$session_exec$main_loop__16240.invoke(session.clj:217)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:833)
