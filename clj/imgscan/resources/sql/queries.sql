@@ -1,4 +1,4 @@
--- :name create-image! :! :n
+-- :name create-image! :i! :*
 INSERT INTO imgscan_image
   (imgfile, detect, scanned)
 VALUES
