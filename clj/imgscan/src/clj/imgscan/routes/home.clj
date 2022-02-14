@@ -8,7 +8,8 @@
    [ring.util.http-response :as response]))
 
 (defn home-page [request]
-  (layout/render request "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
+  (layout/render request "home.html"
+                 {:docs (-> "docs/docs.md" io/resource slurp)}))
 
 (defn about-page [request]
   (layout/render request "about.html"))
