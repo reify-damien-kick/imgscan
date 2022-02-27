@@ -1,8 +1,9 @@
 (defproject imgscan "0.1.0-SNAPSHOT"
 
   :description
-  (str "Just an exercise: passes an image to Google Vision and gets "
-       "labels from it")
+  "Just an exercise: passes an image to Google Vision and gets labels 
+from it"
+  
   :url "https://github.com/dkick/imgscan"
 
   :dependencies [[ch.qos.logback/logback-classic "1.2.3"]
