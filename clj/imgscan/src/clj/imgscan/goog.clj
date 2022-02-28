@@ -1,8 +1,7 @@
 (ns imgscan.goog
   (:require [clojure.java.io :as io])
-  (:import [com.google.cloud.vision.v1
-            AnnotateImageRequest Feature Feature$Type Image
-            ImageAnnotatorClient]
+  (:import [com.google.cloud.vision.v1 AnnotateImageRequest Feature
+            Feature$Type Image ImageAnnotatorClient]
            [com.google.protobuf ByteString]
            [java.util ArrayList]))
 
@@ -30,32 +29,24 @@
 
 (defn requests->response [requests]
   (with-open [client (ImageAnnotatorClient/create)]
-    (.. client (batchAnnotateImages requests))))
+    (. client (batchAnnotateImages requests))))
 
 (defn response->responses [response]
-  (.. response getResponsesList))
+  (.getResponsesList response))
 
 (defn responses->annotations [responses]
   (let [{errors true, annotations false}
         , (group-by #(.hasError %) responses)]
     {:annotations annotations, :errors errors}))
 
+(defn file->annotations [file]
+  (-> file file->bytes bytes->image image->request file->response
+      response->responses responses->annotations))
+
 (defn annotation->labels [enan]
   (->> (.getLabelAnnotationsList enan)
        (map #(.getDescription %))
        (remove nil?)))
-
-(defn file->request [file]
-  (-> file file->bytes bytes->image image->request))
-
-(defn file->requests [file]
-  (-> file file->request request->requests))
-
-(defn file->response [file]
-  (-> file file->requests requests->response))
-
-(defn file->annotations [file]
-  (-> file file->response response->responses responses->annotations))
 
 (defn file->labels [file]
   (let [{:keys [annotations]} (file->annotations file)]
