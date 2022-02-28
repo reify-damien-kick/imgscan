@@ -18,10 +18,10 @@
   (.. Image newBuilder (setContent bytes) build))
 
 (defn image->request [image]
-  (let [featr (.. Feature newBuilder
-                  (setType Feature$Type/LABEL_DETECTION) build)]
+  (let [labels (.. Feature newBuilder
+                   (setType Feature$Type/LABEL_DETECTION) build)]
     (.. AnnotateImageRequest newBuilder
-        (addFeatures featr) (setImage image) build)))
+        (addFeatures labels) (setImage image) build)))
 
 (defn request->requests [request]
   (doto (ArrayList.) (.add request)))
