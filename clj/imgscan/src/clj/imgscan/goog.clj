@@ -42,9 +42,8 @@
   (-> file file->bytes bytes->image image->request file->response
       response->responses responses->annotations))
 
-(defn annotation->labels [enan]
-  (->> (.getLabelAnnotationsList enan)
-       (map #(.getDescription %))
+(defn annotation->labels [annotation]
+  (->> (map #(.getDescription %) (.getLabelAnnotationsList annotation))
        (remove nil?)))
 
 (defn file->labels [file]
