@@ -35,7 +35,7 @@
 (defn response->responses [response]
   (.. response getResponsesList))
 
-(defn responses->annotations-errors [responses]
+(defn responses->annotations [responses]
   (let [{errors true, annotations false}
         , (group-by #(.. % hasError) responses)]
     {:annotations annotations, :errors errors}))
@@ -54,10 +54,9 @@
 (defn file->response [file]
   (-> file file->requests requests->response))
 
-(defn file->annotations-errors [file]
-  (-> file file->response response->responses
-      responses->annotations-errors))
+(defn file->annotations [file]
+  (-> file file->response response->responses responses->annotations))
 
 (defn file->labels [file]
-  (let [{:keys [annotations]} (file->annotations-errors file)]
+  (let [{:keys [annotations]} (file->annotations file)]
     (mapcat annotation->labels annotations)))
