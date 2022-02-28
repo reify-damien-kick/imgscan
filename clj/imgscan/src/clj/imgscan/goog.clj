@@ -37,7 +37,7 @@
 
 (defn responses->annotations [responses]
   (let [{errors true, annotations false}
-        , (group-by #(.. % hasError) responses)]
+        , (group-by #(.hasError %) responses)]
     {:annotations annotations, :errors errors}))
 
 (defn annotation->labels [enan]
