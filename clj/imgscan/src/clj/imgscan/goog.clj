@@ -40,7 +40,7 @@
         , (group-by #(.. % hasError) responses)]
     {:annotations annotations, :errors errors}))
 
-(defn entity-annotation->labels [enan]
+(defn annotation->labels [enan]
   (->> (.getLabelAnnotationsList enan)
        (map #(.getDescription %))
        (remove nil?)))
@@ -60,4 +60,4 @@
 
 (defn file->labels [file]
   (let [{:keys [annotations]} (file->annotations-errors file)]
-    (mapcat entity-annotation->labels annotations)))
+    (mapcat annotation->labels annotations)))
