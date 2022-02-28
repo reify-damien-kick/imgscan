@@ -19,8 +19,7 @@
 
 (defn image->request [image]
   (let [featr (.. Feature newBuilder
-                  (setType Feature$Type/LABEL_DETECTION)
-                  build)]
+                  (setType Feature$Type/LABEL_DETECTION) build)]
     (.. AnnotateImageRequest newBuilder
         (addFeatures featr) (setImage image) build)))
 
