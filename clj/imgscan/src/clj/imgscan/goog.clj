@@ -32,7 +32,7 @@
 
 (defn ->annotations [responses]
   (let [{errors true, annotations false}
-        , (group-by #(.hasError %) responses)]
+        ,,(group-by #(.hasError %) responses)]
     {:annotations annotations, :errors errors}))
 
 (defn ->labels [annotation]
@@ -41,7 +41,7 @@
 
 (defn labels [file]
   (let [{:keys [annotations]}
-        , (-> file ->bytes ->image ->request ->requests ->response
+        ,,(-> file ->bytes ->image ->request ->requests ->response
               ->responses ->annotations)]
     (mapcat ->labels annotations)))
 
