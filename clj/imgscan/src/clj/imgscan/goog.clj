@@ -7,8 +7,7 @@
            [java.util ArrayList]))
 
 (defn labels [imgfile]
-  (with-open [client (ImageAnnotatorClient/create)]
-    client))
+  (file->labels imgfile))
 
 (defn file->bytes [file]
   (with-open [in (-> file io/resource io/input-stream)
@@ -37,7 +36,14 @@
   (.. response getResponsesList))
 
 (defn responses->annotations-errors [responses]
-  )
+  (let [{errors true, annotations false}
+        , (group-by #(.. % hasError) responses)]
+    {:annotations annotations, :errors errors}))
+
+(defn entity-annotation->labels [enan]
+  (->> (.getLabelAnnotationsList enan)
+       (map #(.getDescription %))
+       (remove nil?)))
 
 (defn file->request [file]
   (-> file file->bytes bytes->image image->request))
@@ -47,3 +53,11 @@
 
 (defn file->response [file]
   (-> file file->requests requests->response))
+
+(defn file->annotations-errors [file]
+  (-> file file->response response->responses
+      responses->annotations-errors))
+
+(defn file->labels [file]
+  (let [{:keys [annotations]} (file->annotations-errors file)]
+    (mapcat entity-annotation->labels annotations)))
