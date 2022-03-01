@@ -39,8 +39,8 @@
   (->> (map #(.getDescription %) (.getLabelAnnotationsList annotation))
        (remove nil?)))
 
-(defn labels [file]
+(defn labels [imgfile]
   (let [{:keys [annotations]}
-        ,,(-> file ->bytes ->image ->request ->requests ->response
-              ->responses ->annotations)]
+        ,,(-> imgfile ->bytes ->image ->request ->requests
+              ->response ->responses ->annotations)]
     (mapcat ->labels annotations)))
