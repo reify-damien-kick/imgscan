@@ -44,4 +44,3 @@
         ,,(-> file ->bytes ->image ->request ->requests ->response
               ->responses ->annotations)]
     (mapcat ->labels annotations)))
-
