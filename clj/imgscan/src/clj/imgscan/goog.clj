@@ -42,5 +42,5 @@
 (defn labels [imgfile]
   (let [{:keys [annotations]}
         ,, (-> imgfile ->bytes ->image ->request ->requests
-              ->response ->responses ->annotations)]
+               ->response ->responses ->annotations)]
     (mapcat ->labels annotations)))
