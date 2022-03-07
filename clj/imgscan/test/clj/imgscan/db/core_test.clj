@@ -7,7 +7,7 @@
    [next.jdbc :as jdbc]
    [imgscan.config :refer [env]]
    [mount.core :as mount]
-   ;; -------------------
+   ;;--------------------
    [encaje.core :refer [-||]]
    [imgscan.util :refer [temp-imgfile]])
   (:import [java.io File]))
