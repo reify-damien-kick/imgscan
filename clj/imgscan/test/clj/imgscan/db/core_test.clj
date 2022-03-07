@@ -14,12 +14,12 @@
 
 (use-fixtures
   :once
-  (fn [f]
+  (fn [test-fn]
     (mount/start
      #'imgscan.config/env
      #'imgscan.db.core/*db*)
     (migrations/migrate ["migrate"] (select-keys env [:database-url]))
-    (f)))
+    (test-fn)))
 
 (deftest test-sql-queries
   (jdbc/with-transaction [t-conn *db* {:rollback-only true}]
