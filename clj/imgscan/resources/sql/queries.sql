@@ -1,8 +1,8 @@
 -- :name create-image! :i! :*
 INSERT INTO imgscan_image
-  (imgfile, detect, scanned)
+  (imgfile, detect)
 VALUES
-  (:imgfile, :detect, :scanned)
+  (:imgfile, :detect)
 
 
 -- :name get-images :? :*
