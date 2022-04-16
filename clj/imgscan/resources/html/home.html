@@ -1,6 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
   <div class="content">
-  {{docs|markdown}}
+    <div class="columns is-centered">
+      <div class="column is-two-thirds">
+        <!-- content -->
+        <div class="columns">
+          <div class="column">
+            <h3>Images</h3>
+            <ul class="images">
+              {% for item in images %}
+              <li>
+                <p>{{item.imgfile}}</p>
+                <p> - detect: {{item.detect}}</p>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock %}

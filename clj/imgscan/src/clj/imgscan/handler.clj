@@ -9,10 +9,12 @@
     [imgscan.env :refer [defaults]]
     [mount.core :as mount]))
 
+(def init-app)
 (mount/defstate init-app
   :start ((or (:init defaults) (fn [])))
   :stop  ((or (:stop defaults) (fn []))))
 
+(def app-routes)
 (mount/defstate app-routes
   :start
   (ring/ring-handler

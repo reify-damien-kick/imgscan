@@ -6,10 +6,13 @@
     [mount.core :refer [defstate]]
     [imgscan.config :refer [env]]))
 
+(def ^:dynamic *db*)
 (defstate ^:dynamic *db*
           :start (conman/connect! {:jdbc-url (env :database-url)})
           :stop (conman/disconnect! *db*))
 
+#_(def create-images!)
+(def get-images)
 (conman/bind-connection *db* "sql/queries.sql")
 
 (extend-protocol next.jdbc.result-set/ReadableColumn

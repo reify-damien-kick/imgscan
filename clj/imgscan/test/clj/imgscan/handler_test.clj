@@ -1,8 +1,9 @@
 (ns imgscan.handler-test
   (:require
-    [clojure.test :refer :all]
-    [ring.mock.request :refer :all]
-    [imgscan.handler :refer :all]
+    [clojure.test :refer [deftest is testing use-fixtures]]
+    [ring.mock.request :refer [request]]
+    [imgscan.config :as config]
+    [imgscan.handler :as handler]
     [imgscan.middleware.formats :as formats]
     [muuntaja.core :as m]
     [mount.core :as mount]))
@@ -13,15 +14,14 @@
 (use-fixtures
   :once
   (fn [f]
-    (mount/start #'imgscan.config/env
-                 #'imgscan.handler/app-routes)
+    (mount/start #'config/env #'handler/app-routes)
     (f)))
 
 (deftest test-app
   (testing "main route"
-    (let [response ((app) (request :get "/"))]
+    (let [response ((handler/app) (request :get "/"))]
       (is (= 200 (:status response)))))
 
   (testing "not-found route"
-    (let [response ((app) (request :get "/invalid"))]
+    (let [response ((handler/app) (request :get "/invalid"))]
       (is (= 404 (:status response))))))

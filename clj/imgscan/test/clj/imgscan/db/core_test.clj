@@ -3,14 +3,13 @@
    [imgscan.db.core :refer [*db*] :as db]
    [java-time.pre-java8]
    [luminus-migrations.core :as migrations]
-   [clojure.test :refer :all]
+   [clojure.test :refer [deftest is use-fixtures]]
    [next.jdbc :as jdbc]
    [imgscan.config :refer [env]]
    [mount.core :as mount]
    ;;--------------------
    [encaje.core :refer [-||]]
-   [imgscan.util :refer [temp-imgfile]])
-  (:import [java.io File]))
+   [imgscan.util :refer [temp-imgfile]]))
 
 (use-fixtures
   :once

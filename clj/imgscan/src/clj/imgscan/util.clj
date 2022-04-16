@@ -1,7 +1,7 @@
 (ns imgscan.util
   (:require [clojure.java.io :as io]
-            [encaje.core :refer [-- -||]])
-  (:import [java.io Closeable File]))
+            [encaje.core :refer [--]])
+  (:import [java.io File]))
 
 (defn temp-imgfile
   ([] (temp-imgfile "xxx"))

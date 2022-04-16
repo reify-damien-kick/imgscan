@@ -2,14 +2,16 @@
   (:require
    [imgscan.layout :as layout]
    [imgscan.db.core :as db]
-   [clojure.java.io :as io]
+   #_[clojure.java.io :as io]
    [imgscan.middleware :as middleware]
    [ring.util.response]
-   [ring.util.http-response :as response]))
+   #_[ring.util.http-response :as response]
+   ; --------------------------------------
+   [encaje.core :refer [--]]))
 
 (defn home-page [request]
-  (layout/render request "home.html"
-                 {:docs (-> "docs/docs.md" io/resource slurp)}))
+  (-- layout/render request "home.html"
+      {:images (db/get-images)}))
 
 (defn about-page [request]
   (layout/render request "about.html"))
