@@ -17,6 +17,25 @@
             </ul>
           </div>
         </div>
+        <div class="columns">
+          <div class="column">
+            <form method="POST" action="/imgscan">
+              {% csrf-field %}
+              <div class="field">
+                <label class="label" for="imgfile">
+                  Image file
+                </label>
+                <input class="input"
+                       type="text"
+                       name="imgfile"
+                       value="{{imgfile}}" />
+              </div>
+              <input type="submit"
+                     class="button is-primary"
+                     value="scan" />
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

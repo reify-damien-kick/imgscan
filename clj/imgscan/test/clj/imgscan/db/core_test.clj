@@ -21,7 +21,7 @@
     (test-fn)))
 
 (deftest test-sql-queries
-  (jdbc/with-transaction [t-conn *db* {:rollback-only true}]
+  (jdbc/with-transaction [_t-conn *db* {:rollback-only true}]
     (with-open [file (-|| .delete temp-imgfile)]
       (let [name (.getName @file)
             [{:keys [id]} & x-rest]
