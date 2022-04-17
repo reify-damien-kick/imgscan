@@ -39,7 +39,7 @@ from it"
                  [org.clojure/tools.reader "1.3.6"]
                  [org.slf4j/slf4j-api "1.7.36"]
                  [org.webjars.npm/bulma "0.9.3"]
-                 [org.webjars.npm/material-icons "1.7.1"]
+                 [org.webjars.npm/material-icons "1.10.8"]
                  [org.webjars/webjars-locator "0.45"]
                  [ring-webjars "0.2.0"]
                  [ring/ring-core "1.9.5"]

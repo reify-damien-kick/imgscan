@@ -25,6 +25,11 @@
                 <label class="label" for="imgfile">
                   Image file
                 </label>
+                {% if errors.imgfile %}
+                <div class="notification is-danger">
+                  {{errors.imgfile|join}}
+                </div>
+                {% endif %}
                 <input class="input"
                        type="text"
                        name="imgfile"
