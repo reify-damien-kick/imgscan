@@ -6,7 +6,7 @@
            [java.util ArrayList]))
 
 (defn ->bytes [file]
-  (with-open [in (-> file io/resource io/input-stream)
+  (with-open [in (io/input-stream file)
               out (java.io.ByteArrayOutputStream.)]
     (io/copy in out)
     (ByteString/copyFrom (.toByteArray out))))

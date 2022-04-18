@@ -24,20 +24,19 @@
    [:detect st/boolean]
    [:scanned st/string]])
 
+(defn img [imgfile]
+  (some->> (seq imgfile) .s (str "img/") io/resource io/as-file))
+
 (defn validate-image [params]
   (if-let [errors (first (st/validate params image-schema))]
     errors
     (let [{:keys [imgfile]} params]
-      (when-not (some->> (seq imgfile) .s (str "img/")
-                         io/resource io/as-file .exists)
+      (when-not (some->> (img imgfile) .exists)
         {:imgfile (str "Image file \"" imgfile "\" does not exist")}))))
 
 (defn normalize-image [params]
   (let [detect' (get params :detect true)]
     (assoc params :detect detect')))
-
-(defn img [imgfile]
-  (str "img/" imgfile))
 
 (defn update-image! [{:keys [imgfile detect] :as params}]
   (st/validate! params image-schema)
