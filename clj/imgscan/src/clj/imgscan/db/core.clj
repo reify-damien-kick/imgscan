@@ -8,11 +8,16 @@
 
 (def ^:dynamic *db*)
 (defstate ^:dynamic *db*
-          :start (conman/connect! {:jdbc-url (env :database-url)})
-          :stop (conman/disconnect! *db*))
+  :start (conman/connect! {:jdbc-url (env :database-url)})
+  :stop (conman/disconnect! *db*))
 
 (def create-image!)
+(def create-image-objects!)
+(def create-imgobject!)
 (def get-images)
+(def get-imgobjects)
+(def get-images-objects)
+(def update-image!)
 (conman/bind-connection *db* "sql/queries.sql")
 
 (extend-protocol next.jdbc.result-set/ReadableColumn
