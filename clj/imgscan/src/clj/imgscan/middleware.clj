@@ -6,7 +6,7 @@
     [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
     [imgscan.middleware.formats :as formats]
     [muuntaja.middleware :refer [wrap-format wrap-params]]
-    [imgscan.config :refer [env]]
+    #_[imgscan.config :refer [env]]
     [ring-ttl-session.core :refer [ttl-memory-store]]
     [ring.middleware.defaults :refer [site-defaults wrap-defaults]]))
 

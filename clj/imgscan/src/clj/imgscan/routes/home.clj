@@ -38,6 +38,10 @@
   (let [detect' (get params :detect true)]
     (assoc params :detect detect')))
 
+(defn first* [[x-first & x-rest]]
+  (assert (nil? x-rest) "Expected only one element")
+  x-first)
+
 (defn update-image! [{:keys [imgfile detect] :as params}]
   (st/validate! params image-schema)
   (when detect
@@ -47,7 +51,7 @@
       (-- db/create-image-objects!
           {:image-id (:id params)
            :imgobject-id (->> (db/create-imgobject! {:label label})
-                              first :id)}))
+                              first* :id)}))
     (db/update-image! (select-keys params [:id]))))
 
 (defn create-image! [{:keys [params]}]

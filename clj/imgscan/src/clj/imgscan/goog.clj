@@ -39,10 +39,10 @@
   (->> (map #(.getDescription %) (.getLabelAnnotationsList annotation))
        (remove nil?)))
 
-(defonce x-labels (atom {}))
+(defonce *labels* {})
 
 (defn labels [imgfile]
-  (or (get @x-labels imgfile)
+  (or (get *labels* imgfile)
       (let [{:keys [annotations]}
             ,, (-> imgfile ->bytes ->image ->request ->requests
                    ->response ->responses ->annotations)]

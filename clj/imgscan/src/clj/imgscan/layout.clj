@@ -7,15 +7,19 @@
     [ring.util.response :refer [content-type]]
     [ring.util.http-response :refer [ok]]
     [ring.util.anti-forgery :refer [anti-forgery-field]]
-    [ring.middleware.anti-forgery :refer [*anti-forgery-token*]]))
+    [ring.middleware.anti-forgery :refer [*anti-forgery-token*]]
+    ; ----------------------------------------------------------
+    [encaje.core :refer [--]]
+    ))
 
 (parser/set-resource-path!  (clojure.java.io/resource "html"))
 (parser/add-tag! :csrf-field (fn [_ _] (anti-forgery-field)))
-(filters/add-filter! :markdown (fn [content] [:safe (md-to-html-string content)]))
+(-- filters/add-filter!
+    :markdown (fn [content] [:safe (md-to-html-string content)]))
 
 (defn render
   "renders the HTML template located relative to resources/html"
-  [request template & [params]]
+  [_request template & [params]]
   (content-type
     (ok
       (parser/render-file
