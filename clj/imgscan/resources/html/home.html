@@ -1,47 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="content">
-    <div class="columns is-centered">
-      <div class="column is-two-thirds">
-        <!-- content -->
-        <div class="columns">
-          <div class="column">
-            <h3>Images</h3>
-            <ul class="images">
-              {% for item in images %}
-              <li>
-                <p>{{item.imgfile}}</p>
-                <p> - detect: {{item.detect}}</p>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column">
-            <form method="POST" action="/image">
-              {% csrf-field %}
-              <div class="field">
-                <label class="label" for="imgfile">
-                  Image file
-                </label>
-                {% if errors.imgfile %}
-                <div class="notification is-danger">
-                  {{errors.imgfile|join}}
-                </div>
-                {% endif %}
-                <input class="input"
-                       type="text"
-                       name="imgfile"
-                       value="{{imgfile}}" />
-              </div>
-              <input type="submit"
-                     class="button is-primary"
-                     value="scan" />
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<input id="token" type="hidden" value="{{csrf-token}}" \>
+<div id="content"></div>
+{% endblock %}
+{% block page-scripts %}
+  {% script "/js/app.js" %}
 {% endblock %}

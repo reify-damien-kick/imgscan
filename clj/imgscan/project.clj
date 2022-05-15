@@ -1,9 +1,9 @@
 (defproject imgscan "0.1.0-SNAPSHOT"
 
   :description
-  "Just an exercise: passes an image to Google Vision and gets labels 
+  "Just an exercise: passes an image to Google Vision and gets labels
 from it"
-  
+
   :url "https://github.com/dkick/imgscan"
 
   :dependencies [[ch.qos.logback/logback-classic "1.2.11"]
@@ -42,46 +42,66 @@ from it"
                  [org.webjars.npm/bulma "0.9.3"]
                  [org.webjars.npm/material-icons "1.10.8"]
                  [org.webjars/webjars-locator "0.45"]
-                 [ring-webjars "0.2.0"]
+                 [ring-webjars "0.2.0"
+                  :exclusions [org.apache.commons/commons-compress]]
                  [ring/ring-core "1.9.5"]
                  [ring/ring-defaults "0.3.3"]
                  [selmer "1.12.50"]]
 
   :min-lein-version "2.0.0"
-  
+
   :source-paths ["src/clj"]
   :test-paths ["test/clj"]
-  :resource-paths ["resources"]
+  :resource-paths ["resources" "target/cljsbuild"]
   :target-path "target/%s/"
   :main ^:skip-aot imgscan.core
 
-  :plugins [[lein-ancient "1.0.0-RC3"]]
+  :plugins [[lein-cljsbuild "1.1.8"]
+            [lein-ancient "1.0.0-RC3"]]
+
+  :cljsbuild
+  {:builds
+   {:app {:source-paths ["src/cljs"]
+          :compiler {:output-to "target/cljsbuild/public/js/app.js"
+                     :output-dir "target/cljsbuild/public/js/out"
+                     :main "imgscan.core"
+                     :asset-path "/js/out"
+                     :optimizations :none
+                     :source-map true
+                     :pretty-print true}}}}
+
+  :clean-targets
+  ^{:protect false}
+  [:target-path
+    [:cljsbuild :builds :app :compiler :output-dir]
+    [:cljsbuild :builds :app :compiler :output-to]]
 
   :profiles
   {:uberjar {:omit-source true
              :aot :all
              :uberjar-name "imgscan.jar"
-             :source-paths ["env/prod/clj" ]
+             :source-paths ["env/prod/clj"]
              :resource-paths ["env/prod/resources"]}
 
    :dev           [:project/dev :profiles/dev]
    :test          [:project/dev :project/test :profiles/test]
 
-   :project/dev  {:jvm-opts ["-Dconf=dev-config.edn" ]
+   :project/dev  {:jvm-opts ["-Dconf=dev-config.edn"]
                   :dependencies [[pjstadig/humane-test-output "0.11.0"]
                                  [prone "2021-04-23"]
-                                 [ring/ring-devel "1.9.5"]
+                                 [ring/ring-devel "1.9.5"
+                                  :exclusions [clj-stacktrace]]
                                  [ring/ring-mock "0.4.0"]]
                   :plugins      [[com.jakemccrary/lein-test-refresh "0.24.1"]
-                                 [jonase/eastwood "0.3.5"]] 
-                  
-                  :source-paths ["env/dev/clj" ]
+                                 [jonase/eastwood "0.3.5"]]
+
+                  :source-paths ["env/dev/clj"]
                   :resource-paths ["env/dev/resources"]
                   :repl-options {:init-ns user
                                  :timeout 120000}
                   :injections [(require 'pjstadig.humane-test-output)
                                (pjstadig.humane-test-output/activate!)]}
-   :project/test {:jvm-opts ["-Dconf=test-config.edn" ]
-                  :resource-paths ["env/test/resources"] }
+   :project/test {:jvm-opts ["-Dconf=test-config.edn"]
+                  :resource-paths ["env/test/resources"]}
    :profiles/dev {}
    :profiles/test {}})

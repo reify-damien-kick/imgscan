@@ -39,7 +39,7 @@
   (->> (map #(.getDescription %) (.getLabelAnnotationsList annotation))
        (remove nil?)))
 
-(defonce *labels* {})
+(defonce ^:dynamic *labels* {})
 
 (defn labels [imgfile]
   (or (get *labels* imgfile)
