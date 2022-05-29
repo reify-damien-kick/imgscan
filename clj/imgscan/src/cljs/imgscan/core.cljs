@@ -1,5 +1,5 @@
-(ns imgscan.core)
+(ns imgscan.core
+  (:require #_[reagent.core :as r]
+            [reagent.dom :as dom]))
 
-(-> (.getElementById js/document "content")
-    (.-innerHTML)
-    (set! "Hello, nurse!"))
+(dom/render [:h1 "Hello, nurse!"] (.getElementById js/document "content"))

@@ -42,6 +42,7 @@ from it"
                  [org.webjars.npm/bulma "0.9.3"]
                  [org.webjars.npm/material-icons "1.10.8"]
                  [org.webjars/webjars-locator "0.45"]
+                 [reagent "1.0.0"]
                  [ring-webjars "0.2.0"
                   :exclusions [org.apache.commons/commons-compress]]
                  [ring/ring-core "1.9.5"]
